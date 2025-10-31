@@ -1,6 +1,6 @@
 # Heathrow Pollution Study
 
-⚠️🚧 The study protocol lacks rigour but serves as guidance for the initial exploration of what is possible using readily available open data.
+⚠️🚧 This study protocol is incomplete and a bit rough, but it provides some structure for running preliminary data analysis
 
 ### Study objective
 Quantify the correlation between aircraft landing activity and pollution at existing ground-level Air Quality Monitors (AQMs).
