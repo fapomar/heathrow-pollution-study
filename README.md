@@ -15,7 +15,6 @@ We hypothesise that periods of high aircraft landing traffic are significantly c
 - AQM: air quality monitors are devices at ground level that measure pollutants
 - Landing path: is the pre-determined path aircrafts must follow in the sky as they approach the airport to touchdown
 - Westerly operations: airport configuration in which the wind blow to the East and aircrafts approach the airport from the East
-- Runway: LHR has two runways north and south see below
 
 ### Variables
 
@@ -34,8 +33,8 @@ These are all weather measurements that can affect how pollution dissipates in t
 | Variable             | Type    | Description                                                                                                |
 | -------------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
 | Atmospheric pressure | Control | Can affect emissions dispersion, especially high pressure                                                  |
-| Rain                 | Control | Can affects pollutant removal from atmosphere                                                              |
-| Wind direction/speed | Control | Can affect direction of dispersion (e.g., if an AQM is located "upwind" it won't likely measure emissions) |
+| Rain                 | Control | Can affect pollutant removal from atmosphere                                                              |
+| Wind direction/speed | Control | Can affect direction of dispersion (e.g., an AQM located "upwind" is is less likely measure emissions) |
 
 Wind is a complex variable to control because speed and direction can change depending on altitude. This dissipates pollution horizontally and vertically in ways that is complex to predict.
 
@@ -49,32 +48,34 @@ There are other variables that may be impossible to control due to scarcity of d
 #### AQM location
 
 We are interested in measuring the amount of pollution in aircraft landings, not take off, because:
-- all aircrafts follow a predetermined path as they approach the airport
+- all aircrafts follow a predetermined path as they approach the runway
 - aircrafts fly over London in relatively low altitude for a prolonged amount of time
 
-Furthermore, it's important to understand the runway operations at LHR.
+For context, it's important to understand the runway operations at London Heathrow.
 
 LHR operates a runway alteration programme that runs in a two week cycle when operating a westerly service (70% of time). This yearly programme is published by the airport, and its aim is to give local communities respite to noise pollution.
 
 |                           | 05:00-15:00 | 15:00-23:00 |
 | ------------------------- | ----------- | ----------- |
-| **Westerly** <br>  week 1 | Northern    | Southern    |
-| **Westerly**<br>  week 2  | Southern    | Northern    |
+| **Westerly**  week 1 | Northern    | Southern    |
+| **Westerly**  week 2  | Southern    | Northern    |
 | **Easterly**              | Southern    | Southern    |
 
-It is possible to identify which runway is operating for landing based on the schedule programme and historical wind directions (to confirms if the window is blowing from the west).
+There is no publicly available historical data on runway operations at Heathrow. However, it is possible to infer which runway was in use for a given day by examining the runway programme and historical wind directions (to confirm actual operations).
 
-###### Selection criteria
-- AQMs historical data is free and retrievable from the London Air network
-- Horizontal distance to landing flight path
-- Horizontal distance to airport
+###### Selection Criteria
+1. AQMs historical data is free and retrievable
+2. Horizontal distance to landing flight path
+3. Horizontal distance to runway
 ###### Selected AQMs
-AQMs to the west of LHR:
-There are no AQMs to the west of LHR that fit the selection criteria.
+AQMs historical data is free and retrievable:
+- We will use data from [London Air Quality Network](https://www.londonair.org.uk/london/asp/publicdetails.asp)
 
-AQMs to the east of LHR:
-- *Richmond upon Thames - Richmond*
-- *Wandsworth Battersea*
+Horizontal distance to landing flight path and runway:
+- There are no AQMs to the west of LHR that fit the selection criteria. So, we are limited to those to the East of the airport.
+
+Details of AQMs that adhere to Selection Criteria:
+
 
 | AQM Name                                                                                                                                                                                                | AQM Height | Species               | Horizontal distance to LHR¥ | Horizontal distance to flight path¥                              | Aircraft altitude¥ |
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------- | --------------------------- | ---------------------------------------------------------------- | ------------------ |
@@ -86,24 +87,26 @@ AQMs to the east of LHR:
 #### Road Traffic
 Road traffic follows a cyclical approach that follows day of the week and hour of day, but also whether it's a regular working day or not - for example, school holidays are notorious for having less cars on the road.
 
-**Within day**
+Within day:
+
 Road traffic follows a regular pattern around commuting time. For example, we can use the openly published peak times of the London underground as proxy for road traffic. For example:
 
 |                   | Events              | Road Traffic | Air Traffic |
 | ----------------- | ------------------- | ------------ | ----------- |
 | 00:00 - 05:00     | 05:00 first landing | low🔹        | ----🔹      |
 | 05:00 - 07:00 |                     | low🔹        | high🔹      |
-| 07:00 - 09:15     | Rush hour Balham    | high         | high        |
+| 07:00 - 09:15     | Rush hour    | high         | high        |
 | 09:15 - 17:45 |                     | mid          | high        |
-| 17:45 - 19:45     | Rush hour Balham    | high         | high        |
+| 17:45 - 19:45     | Rush hour    | high         | high        |
 | 19:45 - 23:00 | 23:00 last landing  | low🔹        | high🔹      |
 | 23:00 - 23:59     |                     | low          | --          |
 
-To Do: checkout data.gov.uk for direct data about road traffic peak times
+_Note to self: checkout data.gov.uk for direct data about road traffic peak times_
 
 This makes it possible to compare pollution measurements, for example, at 4am (low road, no air) against 5am or 6am (low road, high air).
 
-Outside of the scope of this study protocol, a researcher could look at comparing pollution data across different days; for example, a workday Monday against a school holiday Monday whilst controlling for cofounding variables (i.e., only days with similar meteorological conditions)
+Outside of the scope of this study protocol, another study could look at comparing pollution data across different days; for example, a workday Monday against a school holiday Monday whilst controlling for cofounding variables (i.e., only days with similar meteorological conditions)
+
 ## Methodology
 
 This is an **observational, time-series correlational study** using secondary data from multiple public sources.
@@ -133,9 +136,6 @@ Data structure example:
 
 Compare pollution data from the furthest AQM to the flight path downwind, against different times of the day, to identify aircraft as significant source of pollution. We'll control for wind direction at ground level.
 
-LHR runways do not follow a perfect West-East path, it's slightly angled. This means that the wind of interest is not, for example, North-South, but this variable needs to be slightly adjusted to be perpendicular to the flight path
-
-
 ![Study setup diagram](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/LHR-StudySetup_2.jpg?raw=true)
 
 We are controlling for:
@@ -146,7 +146,3 @@ We are controlling for:
 - Flight Radar 24 - [link](https://www.flightradar24.com/)
 - Free measure tools - [link](https://www.freemaptools.com/measure-distance.htm)
 - London Air Quality network - links on table
-
-
-Your study protocol is quite detailed and well thought out—strong overall. That said, I’ll walk through a **structured critique** and highlight a few **strengths**, **flaws or gaps**, and **recommendations for improvement**, grouped by area.
-
