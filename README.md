@@ -80,6 +80,7 @@ AQMs to the east of LHR:
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------- | --------------------------- | ---------------------------------------------------------------- | ------------------ |
 | [Wandsworth - Battersea](https://www.londonair.org.uk/london/asp/publicdetails.asp?site=WAA&Maptype=Google&mapview=All&la_id=&zoom=13&lat=51.487828635004526&lon=-0.17029244482421158&laEdge=&details=) | 2.5 meters | NOx<br>PM10<br>PM2.5  | 20 km                       | north runway: <br>0km<br><br>south runway:<br>1.3km to the north | 1.2 km             |
 | [Richmond Upon Thames - Richmond](https://www.londonair.org.uk/london/asp/publicdetails.asp?region=0&site=RHI&bulletin=hourly&la_id=&bulletindate=18/10/2025&postcode=&MapType=Google&VenueCode=)       | 1.5 meters | NOx<br>PM10 <br>PM2.5 | 9 km                        | north run:<br>2.2 km to the south<br><br>south run:<br>0km       | 0.6 km             |
+
 *¥ Measurements collected on 20/10/2025 at 10:00am and 4:00pm on a sample of 2 aircrafts*
 
 #### Road Traffic
