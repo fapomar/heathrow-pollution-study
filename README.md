@@ -1,8 +1,6 @@
 # Heathrow Pollution Study
 
-⚠️🚧This is an initial **rough draft**. ⚠️🚧
-
-The study protocol lacks rigour but serves as guidance for the initial exploration of what is possible using readily available open data.
+⚠️🚧 The study protocol lacks rigour but serves as guidance for the initial exploration of what is possible using readily available open data.
 
 ### Study objective
 Quantify the correlation between aircraft landing activity and pollution at existing ground-level Air Quality Monitors (AQMs).
@@ -19,7 +17,7 @@ We hypothesise that periods of high aircraft landing traffic are significantly c
 - Westerly operations: airport configuration in which the wind blow to the East and aircrafts approach the airport from the East
 - Runway: LHR has two runways north and south see below
 
-## Variables
+### Variables
 
 **Primary variables**
 The study will first look into the effect of the primary variables below. If the correlation coefficient is low, we will use utilise the secondary variables in study.
@@ -63,7 +61,9 @@ LHR operates a runway alteration programme that runs in a two week cycle when op
 | **Westerly** <br>  week 1 | Northern    | Southern    |
 | **Westerly**<br>  week 2  | Southern    | Northern    |
 | **Easterly**              | Southern    | Southern    |
+
 It is possible to identify which runway is operating for landing based on the schedule programme and historical wind directions (to confirms if the window is blowing from the west).
+
 ###### Selection criteria
 - AQMs historical data is free and retrievable from the London Air network
 - Horizontal distance to landing flight path
@@ -91,14 +91,14 @@ Road traffic follows a regular pattern around commuting time. For example, we ca
 |                   | Events              | Road Traffic | Air Traffic |
 | ----------------- | ------------------- | ------------ | ----------- |
 | 00:00 - 05:00     | 05:00 first landing | low🔹        | ----🔹      |
-| ==05:00 - 07:00== |                     | low🔹        | high🔹      |
+| 05:00 - 07:00 |                     | low🔹        | high🔹      |
 | 07:00 - 09:15     | Rush hour Balham    | high         | high        |
-| ==09:15 - 17:45== |                     | mid          | high        |
+| 09:15 - 17:45 |                     | mid          | high        |
 | 17:45 - 19:45     | Rush hour Balham    | high         | high        |
-| ==19:45 - 23:00== | 23:00 last landing  | low🔹        | high🔹      |
+| 19:45 - 23:00 | 23:00 last landing  | low🔹        | high🔹      |
 | 23:00 - 23:59     |                     | low          | --          |
 
-==To Do: checkout data.gov.uk for direct data about road traffic peak times==
+To Do: checkout data.gov.uk for direct data about road traffic peak times
 
 This makes it possible to compare pollution measurements, for example, at 4am (low road, no air) against 5am or 6am (low road, high air).
 
@@ -107,17 +107,17 @@ Outside of the scope of this study protocol, a researcher could look at comparin
 
 This is an **observational, time-series correlational study** using secondary data from multiple public sources.
 
-#### Study design
+### Study design
 
-**Setup 1**
+#### Setup 1
+
 Compare pollution data from the closest AQM to the flight path, against different times of the day, to identify aircraft as significant source of pollution.
 
 We are controlling for:
 - Road traffic: variation within the same day
 - AQM location: directly under the flight path
 
-![[LHR - Setup 1.jpg]]
-
+![Study setup diagram](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/LHR-StudySetup_1.jpg?raw=true)
 
 Data structure example:
 
@@ -128,12 +128,14 @@ Data structure example:
 | 2025-03-02 | 31    | 34    | 38    | 40    | 50    |
 
 
-**Setup 2**
+#### Setup 2
+
 Compare pollution data from the furthest AQM to the flight path downwind, against different times of the day, to identify aircraft as significant source of pollution. We'll control for wind direction at ground level.
 
 LHR runways do not follow a perfect West-East path, it's slightly angled. This means that the wind of interest is not, for example, North-South, but this variable needs to be slightly adjusted to be perpendicular to the flight path
 
-![[LHR - Setup 2.jpg]]
+
+![Study setup diagram](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/LHR-StudySetup_2.jpg?raw=true)
 
 We are controlling for:
 - Road traffic: variation within the same day
