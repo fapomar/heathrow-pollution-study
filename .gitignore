@@ -1,0 +1,15 @@
+
+# Ignore data output files
+*.html
+*.htm
+*.csv
+
+# Ignore common hidden files
+.env
+.DS_Store
+*.log
+
+# Ignore hidden folders
+.idea/
+.vscode/
+target/
