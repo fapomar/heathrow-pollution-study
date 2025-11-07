@@ -1,8 +1,9 @@
 
-# Ignore data output files
+# Ignore data output data files
 *.html
 *.htm
 *.csv
+*.json
 
 # Ignore common hidden files
 .env
