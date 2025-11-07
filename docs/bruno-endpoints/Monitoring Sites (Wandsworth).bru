@@ -1,0 +1,16 @@
+meta {
+  name: Monitoring Sites (Wandsworth)
+  type: http
+  seq: 3
+}
+
+get {
+  url: https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=wandsworth/Json
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

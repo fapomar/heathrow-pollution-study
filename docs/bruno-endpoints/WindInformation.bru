@@ -1,0 +1,24 @@
+meta {
+  name: WindInformation
+  type: http
+  seq: 5
+}
+
+get {
+  url: https://api.open-meteo.com/v1/forecast?latitude=51.42&longitude=-0.16&hourly=wind_direction_10m&start_date=2025-10-14&end_date=2025-10-15
+  body: none
+  auth: inherit
+}
+
+params:query {
+  latitude: 51.42
+  longitude: -0.16
+  hourly: wind_direction_10m
+  start_date: 2025-10-14
+  end_date: 2025-10-15
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}

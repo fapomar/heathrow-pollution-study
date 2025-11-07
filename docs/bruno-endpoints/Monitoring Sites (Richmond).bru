@@ -1,0 +1,15 @@
+meta {
+  name: Monitoring Sites (Richmond)
+  type: http
+  seq: 6
+}
+
+get {
+  url: https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringSites/GroupName=richmond/Json
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+}

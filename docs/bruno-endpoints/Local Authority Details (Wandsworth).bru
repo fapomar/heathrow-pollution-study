@@ -1,0 +1,16 @@
+meta {
+  name: Local Authority Details (Wandsworth)
+  type: http
+  seq: 2
+}
+
+get {
+  url: https://api.erg.ic.ac.uk/AirQuality/Information/MonitoringLocalAuthority/GroupName=wandsworth/Json
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
