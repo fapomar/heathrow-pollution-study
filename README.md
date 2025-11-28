@@ -135,7 +135,7 @@ We are controlling for:
 
 ![Setup 2: AQM Downwind of Flight Path](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/LHR-StudySetup_2.jpg)
 
-#### Sample output data structure:
+#### Sample output data structure
 
 | PM10       | 04:00 | 05:00 | 06:00 | 07:00 | 08:00 |
 | ---------- | ----- | ----- | ----- | ----- | ----- |
