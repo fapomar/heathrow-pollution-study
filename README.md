@@ -56,7 +56,7 @@ We are interested in measuring the amount of pollution in aircraft landings, not
 
 However, aircraft will not always approach the airport from the same "side" and land at the same runway. Wind direction (at 600m) and a runway schedule dictates which runway is in use at any give time.
 
-##### Runway operations at London Heathrow
+#### Runway operations at London Heathrow
 Heathrow has two runways (north and south). 
 - When wind blows from the east (**Easterly operations**). The south runway is always used.
 - When wind blows form the west (**Westerly operations**). Either the North or South runways is in use, depending on a schedule.
@@ -71,12 +71,12 @@ The airport operates a westerly service 70% of the time, as follows:
 
 It is possible to identify which runway is operating for landing based on the schedule programme and historical wind directions (to confirms if the window is blowing from the west).
 
-###### Selection criteria
+#### Selection criteria
 - AQMs historical data is free and retrievable from the London Air network
 - Horizontal distance to landing flight path
 - Horizontal distance to airport
  
-###### Selected AQMs
+#### Selected AQMs
 **AQMs to the west of Heathrow:**
 
 There are no AQMs that fit the selection criteria.
@@ -90,6 +90,7 @@ There are no AQMs that fit the selection criteria.
 | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------- | --------------------------- | ---------------------------------------------------------------- | ------------------ |
 | [Wandsworth - Battersea](https://www.londonair.org.uk/london/asp/publicdetails.asp?site=WAA&Maptype=Google&mapview=All&la_id=&zoom=13&lat=51.487828635004526&lon=-0.17029244482421158&laEdge=&details=) | 2.5 meters | NOx<br>PM10<br>PM2.5  | 20 km                       | north runway: <br>0km<br><br>south runway:<br>1.3km to the north | 1.2 km             |
 | [Richmond Upon Thames - Richmond](https://www.londonair.org.uk/london/asp/publicdetails.asp?region=0&site=RHI&bulletin=hourly&la_id=&bulletindate=18/10/2025&postcode=&MapType=Google&VenueCode=)       | 1.5 meters | NOx<br>PM10 <br>PM2.5 | 9 km                        | north run:<br>2.2 km to the south<br><br>south run:<br>0km       | 0.6 km             |
+
 *¥ Measurements collected on 20/10/2025 at 10:00am on a sample of 2 aircrafts*
 
 #### Road Traffic
