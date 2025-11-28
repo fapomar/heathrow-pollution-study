@@ -1,0 +1,16 @@
+meta {
+  name: Hourly Pollution WAA (Wandsworth - Battersea)
+  type: http
+  seq: 8
+}
+
+get {
+  url: https://api.erg.ic.ac.uk/AirQuality/Data/Wide/Site/SiteCode=RHI/StartDate=2025-11-01/EndDate=2025-11-02/Json
+  body: none
+  auth: inherit
+}
+
+settings {
+  encodeUrl: true
+  timeout: 0
+}
