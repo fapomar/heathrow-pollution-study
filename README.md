@@ -100,15 +100,13 @@ Road traffic follows a cyclical approach that follows day of the week and hour o
 
 |               | Events              | Road Traffic | Air Traffic |
 | ------------- |---------------------| ------------ | --------- |
-| 00:00 - 05:00 | 05:00 first landing | 🟢🔹        | ⚪🔹      |
-| 05:00 - 07:00 |                     | 🟢🔹        | 🔴🔹    |
-| 07:00 - 09:15 | Peak commute        | 🔴         | 🔴      |
-| 09:15 - 17:45 |                     | 🟡          | 🔴      |
-| 17:45 - 19:45 | Peak commute        | 🔴         | 🔴      |
-| 19:45 - 23:00 | 23:00 last landing  | 🟢🔹        | ⚪🔹    |
-| 23:00 - 23:59 |                     | 🟢          | --        |
-
-High 🔴 / Mid 🟡 / Low 🟢 / None ⚪
+| 00:00 - 05:00 | 05:00 first landing | low🔹        | --🔹      |
+| 05:00 - 07:00 |                     | low🔹        | high🔹    |
+| 07:00 - 09:15 | Peak commute        | high         | high      |
+| 09:15 - 17:45 |                     | mid          | high      |
+| 17:45 - 19:45 | Peak commute        | high         | high      |
+| 19:45 - 23:00 | 23:00 last landing  | low🔹        | high🔹    |
+| 23:00 - 23:59 |                     | low          | --        |
 
 This makes it possible to compare pollution measurements, for example, at 4am (low road, no aircraft) against 5am or 6am (low road, high aircraft).
 
