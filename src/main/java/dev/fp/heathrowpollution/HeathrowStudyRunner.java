@@ -41,6 +41,8 @@ class HeathrowStudyRunner implements CommandLineRunner {
             config.getLocations().forEach(p -> {
                     System.out.println(p.getDataSource());
                     if (p.getDataSource().equals("LondonAir")){
+                        // To Do: Load London Air data
+                        // Either from LondonAirMapper or from DataService.load()
 
                     }
                 }
