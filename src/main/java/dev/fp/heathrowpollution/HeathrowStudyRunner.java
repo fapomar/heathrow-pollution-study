@@ -29,10 +29,20 @@ class HeathrowStudyRunner implements CommandLineRunner {
         if (config.isDownloadData()){
                 config.getLocations().forEach(p -> {
                     String urlTemplate = p.getUrl();
-                    String cannonincalPath = String.format(p.getDatafolder() + p.getFileformat(), start);
+                    String cannonincalPath = String.format(p.getDatafolder() + p.getFileformat(), start, end);
                     String url = String.format(urlTemplate, start, end);
                     dataService.downloadJson(url,cannonincalPath);
                     System.out.println(url);
+                }
+            );
+        }
+
+        if (config.isLoadJsonFiles()){
+            config.getLocations().forEach(p -> {
+                    System.out.println(p.getDataSource());
+                    if (p.getDataSource().equals("LondonAir")){
+
+                    }
                 }
             );
         }

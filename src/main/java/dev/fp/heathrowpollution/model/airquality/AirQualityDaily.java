@@ -1,6 +1,5 @@
-package dev.fp.heathrowpollution.model;
+package dev.fp.heathrowpollution.model.airquality;
 
-import dev.fp.heathrowpollution.model.AirQualityRecord;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,7 +12,7 @@ import java.util.List;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class DailyAirQuality {
+public class AirQualityDaily {
     private LocalDate date;
     private List<AirQualityRecord> measurements;
 }

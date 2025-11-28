@@ -1,4 +1,4 @@
-package dev.fp.heathrowpollution.model;
+package dev.fp.heathrowpollution.model.airquality;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -12,5 +12,5 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AirQualityDataset {
-    private List<DailyAirQuality> days;
+    private List<AirQualityDaily> days;
 }

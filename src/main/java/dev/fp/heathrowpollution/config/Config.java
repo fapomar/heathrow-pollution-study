@@ -16,15 +16,6 @@ public class Config {
     private List<Location> locations;
     private String startdate;
     private String enddate;
-
     private boolean downloadData;
-
-    public List<Location> getLocations() {
-        return this.locations;
-    }
-
-    public void setLocations(List<Location> locations){
-        this.locations = locations;
-    }
-
+    private boolean loadJsonFiles;
 }
