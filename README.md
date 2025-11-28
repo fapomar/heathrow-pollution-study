@@ -99,20 +99,17 @@ Road traffic follows a cyclical approach that follows day of the week and hour o
 **Within day**
 Road traffic follows a regular pattern around commuting time. For example, we can use the openly published peak times of the London underground as proxy for road traffic and compare to the airport operating times. For example:
 
-|                   | Events              | Road Traffic | Air Traffic |
-| ----------------- | ------------------- | ------------ | --------- |
-| 00:00 - 05:00     | 05:00 first landing | low🔹        | --🔹      |
-| ==05:00 - 07:00== |                     | low🔹        | high🔹    |
-| 07:00 - 09:15     | Rush hour Balham    | high         | high      |
-| ==09:15 - 17:45== |                     | mid          | high      |
-| 17:45 - 19:45     | Rush hour Balham    | high         | high      |
-| ==19:45 - 23:00== | 23:00 last landing  | low🔹        | high🔹    |
-| 23:00 - 23:59     |                     | low          | --        |
-
-==To Do:== checkout data.gov.uk for direct data about road traffic peak times.
+|               | Events              | Road Traffic | Air Traffic |
+| ------------- | ------------------- | ------------ | --------- |
+| 00:00 - 05:00 | 05:00 first landing | low🔹        | --🔹      |
+| 05:00 - 07:00 |                     | low🔹        | high🔹    |
+| 07:00 - 09:15 | Rush hour Balham    | high         | high      |
+| 09:15 - 17:45 |                     | mid          | high      |
+| 17:45 - 19:45 | Rush hour Balham    | high         | high      |
+| 19:45 - 23:00 | 23:00 last landing  | low🔹        | high🔹    |
+| 23:00 - 23:59 |                     | low          | --        |
 
 This makes it possible to compare pollution measurements, for example, at 4am (low road, no aircraft) against 5am or 6am (low road, high aircraft).
-
 
 ## Methodology
 
