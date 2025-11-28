@@ -77,11 +77,11 @@ It is possible to identify which runway is operating for landing based on the sc
 - Horizontal distance to airport
  
 #### Selected AQMs
-**AQMs to the west of Heathrow:**
+AQMs to the west of Heathrow:
 
 There are no AQMs that fit the selection criteria.
 
-**AQMs to the east of Heathrow:**
+AQMs to the east of Heathrow:
 
 - *Richmond upon Thames - Richmond*
 - *Wandsworth Battersea*
