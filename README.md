@@ -149,4 +149,4 @@ A future research could look at comparing pollution data across different days; 
 ## Data sources
 - Flight Radar 24 - [link](https://www.flightradar24.com/)
 - Free measure tools - [link](https://www.freemaptools.com/measure-distance.htm)
-- London Air Quality network - links on table
+- London Air Quality network - links on AQM tables above
