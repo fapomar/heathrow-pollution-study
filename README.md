@@ -125,13 +125,6 @@ We are controlling for:
 
 ![Setup 1: AQM Under Flight Path](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/LHR-StudySetup_1.jpg)
 
-Output data structure example:
-
-| PM10       | 04:00 | 05:00 | 06:00 | 07:00 | 08:00 |
-| ---------- | ----- | ----- | ----- | ----- | ----- |
-| 2025-03-01 | 30    | 35    | 41    | 59    | 55    |
-| 2025-03-02 | 27    | 33    | 37    | 34    | 49    |
-| 2025-03-02 | 31    | 34    | 38    | 40    | 50    |
 
 #### Setup 2: AQM Downwind of Flight Path
 Compare pollution data from the furthest AQM to the flight path **downwind**, against different times of the same day, to identify aircraft as significant source of pollution. We'll control for wind direction at ground level.
@@ -141,6 +134,14 @@ We are controlling for:
 - AQM location: **downwind** from flight path
 
 ![Setup 2: AQM Downwind of Flight Path](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/LHR-StudySetup_2.jpg)
+
+#### Sample output data structure:
+
+| PM10       | 04:00 | 05:00 | 06:00 | 07:00 | 08:00 |
+| ---------- | ----- | ----- | ----- | ----- | ----- |
+| 2025-03-01 | 30    | 35    | 41    | 59    | 55    |
+| 2025-03-02 | 27    | 33    | 37    | 34    | 49    |
+| 2025-03-02 | 31    | 34    | 38    | 40    | 50    |
 
 ## Study Limitations
 A future research could look at comparing pollution data across different days; for example, a workday Monday against a school holiday Monday whilst controlling for cofounding variables (i.e., only days with similar meteorological conditions)
