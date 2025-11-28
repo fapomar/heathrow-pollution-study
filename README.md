@@ -69,7 +69,7 @@ The airport operates a westerly service 70% of the time, as follows:
 | **Westerly**<br>  week 2  | Southern    | Northern    |
 | **Easterly**              | Southern    | Southern    |
 
-It is possible to identify which runway is operating for landing based on the schedule programme and historical wind directions (to confirms if the window is blowing from the west).
+It is possible to identify which runway is operating for landing based on the schedule programme and confirm it based on historical wind directions.
 
 #### Selection criteria
 - AQMs historical data is free and retrievable from the London Air network
@@ -79,7 +79,7 @@ It is possible to identify which runway is operating for landing based on the sc
 #### Selected AQMs
 AQMs to the west of Heathrow:
 
-There are no AQMs that fit the selection criteria.
+- There are no AQMs that fit the selection criteria.
 
 AQMs to the east of Heathrow:
 
