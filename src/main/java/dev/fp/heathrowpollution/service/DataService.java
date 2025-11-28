@@ -10,13 +10,17 @@ import java.net.http.HttpResponse;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.ObjectWriter;
+
+
 @Service
 public class DataService {
 
     public DataService() {
     }
 
-    public boolean download(String url, String file){
+    public boolean downloadJson(String url, String outputFile){
         HttpClient client = HttpClient.newHttpClient();
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(url))
@@ -26,10 +30,15 @@ public class DataService {
 
         try {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            String content = response.body();
+            String originalContent = response.body();
 
-            Path filePath = Path.of(file);
-            Files.writeString(filePath, content);
+            ObjectMapper mapper = new ObjectMapper();
+            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
+
+            String prettyContent = writer.writeValueAsString(mapper.readTree(originalContent));
+
+            Path filePath = Path.of(outputFile);
+            Files.writeString(filePath, prettyContent);
 
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
