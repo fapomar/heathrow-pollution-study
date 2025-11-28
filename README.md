@@ -96,16 +96,15 @@ AQMs to the east of Heathrow:
 #### Road Traffic
 Road traffic follows a cyclical approach that follows day of the week and hour of day, but also whether it's a regular working day or not.
 
-**Within day**
-Road traffic follows a regular pattern around commuting time. For example, we can use the openly published peak times of the London underground as proxy for road traffic and compare to the airport operating times. For example:
+**Within day**, road traffic follows a regular pattern around commuting time. For example, we can use the openly published peak times of the London underground as proxy for road traffic and compare to the airport operating times. For example:
 
 |               | Events              | Road Traffic | Air Traffic |
-| ------------- | ------------------- | ------------ | --------- |
+| ------------- |---------------------| ------------ | --------- |
 | 00:00 - 05:00 | 05:00 first landing | low🔹        | --🔹      |
 | 05:00 - 07:00 |                     | low🔹        | high🔹    |
-| 07:00 - 09:15 | Rush hour Balham    | high         | high      |
+| 07:00 - 09:15 | Peak commute        | high         | high      |
 | 09:15 - 17:45 |                     | mid          | high      |
-| 17:45 - 19:45 | Rush hour Balham    | high         | high      |
+| 17:45 - 19:45 | Peak commute        | high         | high      |
 | 19:45 - 23:00 | 23:00 last landing  | low🔹        | high🔹    |
 | 23:00 - 23:59 |                     | low          | --        |
 
