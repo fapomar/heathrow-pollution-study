@@ -137,9 +137,9 @@ We are controlling for:
 
 ## Conclusion
 
-⚠️🚧Work In Progress ⚠️🚧
+Work In Progress
 
-**Sample output data structure**
+Sample output data structure:
 
 | PM10       | 04:00 | 05:00 | 06:00 | 07:00 | 08:00 |
 | ---------- | ----- | ----- | ----- | ----- | ----- |
