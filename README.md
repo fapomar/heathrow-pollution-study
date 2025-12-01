@@ -151,6 +151,8 @@ Sample output data structure:
 A future research could look at comparing pollution data across different days; for example, a workday Monday against a school holiday Monday whilst controlling for cofounding variables (i.e., only days with similar meteorological conditions)
 
 ## Data Sources
-- [Flight Radar 24](https://www.flightradar24.com/)
-- [Free measure tools](https://www.freemaptools.com/measure-distance.htm)
+- [London Heathrow Alternation Programmee](https://www.heathrow.com/company/local-community/noise/operations/runway-alternation)
+- [Open Meteo](https://open-meteo.com/)
 - [London Air Quality network](#selected-aqms)
+- [Free measure tools](https://www.freemaptools.com/measure-distance.htm)
+- [Flight Radar 24](https://www.flightradar24.com/)
