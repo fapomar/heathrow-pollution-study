@@ -4,18 +4,14 @@
 
 The study protocol has gaps, but serves as guidance for the initial exploration of what is possible using readily available open data.
 
-### Study objective
+### Study Objective
 Quantify the correlation between aircraft landing activity and pollution at existing ground-level Air Quality Monitors (AQMs).
 
-### Research question
+### Research Question
 To what extent do ground-level AQMs near Heathrow flight path detect pollution attributable to aircraft landings?
 
 ### Hypothesis
-We hypothesise that periods of high aircraft landing traffic are significantly correlated with elevated ground-level concentrations of NOx, PM2.5, and PM10, controlling for road traffic pollution and meteorological factors.
-
-### Terminology
-- AQM: air quality monitors are devices at ground level that measure pollutants
-- Landing path: is the pre-determined path aircraft must follow in the sky as they approach the airport to touchdown
+We hypothesise that periods of high aircraft landing traffic are significantly correlated with elevated ground-level concentrations of PM2.5 and PM10, controlling for road traffic pollution and meteorological factors.
 
 ## Variables
 
@@ -49,7 +45,7 @@ There are other variables that may be impossible to control due to scarcity of d
 - Aircraft total weight
 - Quality of fuel
 
-#### AQM location
+#### AQM Location
 
 We are interested in measuring the amount of pollution in aircraft landings, not take-offs, because:
 - all aircraft follow a predetermined path as they approach the airport
@@ -57,9 +53,10 @@ We are interested in measuring the amount of pollution in aircraft landings, not
 
 However, aircraft will not always approach the airport from the same "side" and land at the same runway. Wind direction (at 600m) and a runway schedule dictates which runway is in use at any give time. So we need to model Heathrow's runway operations.
 
-#### Runway operations at Heathrow
+**Runway operations at Heathrow**
 
-Heathrow has two runways (north and south). 
+Heathrow has two runways (north and south) that are used as follows.
+
 - **Easterly operations**: when wind blows from the east, aircraft approach from the west. The South runway is always used.
 - **Westerly operations**: when wind blows form the west, aircraft approach from the east (flying over London). In this configuration, either the North or South runways is in use, depending on a schedule.
 
@@ -73,7 +70,7 @@ The airport operates a Westerly service 70% of the time, as follows:
 
 It is possible to identify which runway was operating based on the official schedule programme and confirming it based on historical wind directions.
 
-#### Selection criteria
+#### AQM Selection Criteria
 - AQMs historical data is free and retrievable from the London Air network
 - Horizontal distance to landing flight path
 - Horizontal distance to airport
@@ -117,7 +114,7 @@ This makes it possible to compare pollution measurements, for example, at 4am (l
 
 This is an **observational, time-series correlational study** using secondary data from multiple public sources.
 
-### Study design
+### Study Design
 
 #### Setup 1: AQM Under Flight Path
 Compare pollution data from the closest AQM to the flight path, against different times of the same day, to identify aircraft as significant source of pollution.
@@ -138,7 +135,11 @@ We are controlling for:
 
 ![Setup 2: AQM Downwind of Flight Path](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/LHR-StudySetup_2.jpg)
 
-#### Sample output data structure
+## Conclusion
+
+⚠️🚧Work In Progress ⚠️🚧
+
+**Sample output data structure**
 
 | PM10       | 04:00 | 05:00 | 06:00 | 07:00 | 08:00 |
 | ---------- | ----- | ----- | ----- | ----- | ----- |
@@ -149,7 +150,7 @@ We are controlling for:
 ## Study Limitations
 A future research could look at comparing pollution data across different days; for example, a workday Monday against a school holiday Monday whilst controlling for cofounding variables (i.e., only days with similar meteorological conditions)
 
-## Data sources
-- Flight Radar 24 - [link](https://www.flightradar24.com/)
-- Free measure tools - [link](https://www.freemaptools.com/measure-distance.htm)
-- London Air Quality network - links on AQM tables above
+## Data Sources
+- [Flight Radar 24](https://www.flightradar24.com/)
+- [Free measure tools](https://www.freemaptools.com/measure-distance.htm)
+- [London Air Quality network](#selected-aqms)
