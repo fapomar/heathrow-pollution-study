@@ -1,6 +1,6 @@
 # Heathrow Pollution Study
 
-⚠️🚧This is an initial **rough draft**. ⚠️🚧
+🚧👷This is an initial **rough draft**.
 
 The study protocol has gaps, but serves as guidance for the initial exploration of what is possible using readily available open data.
 
