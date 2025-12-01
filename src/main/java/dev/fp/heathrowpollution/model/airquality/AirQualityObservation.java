@@ -10,7 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class AirQualityRecord {
+public class AirQualityObservation {
     private LocalDateTime timestamp;
     private double pm25;
     private double pm10;

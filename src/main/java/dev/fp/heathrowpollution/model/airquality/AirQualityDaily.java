@@ -14,5 +14,5 @@ import java.util.List;
 @NoArgsConstructor
 public class AirQualityDaily {
     private LocalDate date;
-    private List<AirQualityRecord> measurements;
+    private List<AirQualityObservation> measurements;
 }

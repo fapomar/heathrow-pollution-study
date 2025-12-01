@@ -13,4 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 public class AirQualityDataset {
     private List<AirQualityDaily> days;
+    private String name;
 }

@@ -1,5 +1,6 @@
 package dev.fp.heathrowpollution.service;
 
+import dev.fp.heathrowpollution.model.airquality.AirQualityDataset;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -12,7 +13,6 @@ import java.nio.file.Path;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ObjectWriter;
-
 
 @Service
 public class DataService {
@@ -47,6 +47,11 @@ public class DataService {
         return true;
     }
 
-    public void load(String folder){
+    public AirQualityDataset load(String inputFile) {
+        // ToDo: Load JSON file and unmarshall into AirQualityDataset
+        System.out.println(inputFile);
+
+        return null;
     }
+
 }

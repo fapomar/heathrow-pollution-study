@@ -1,12 +1,12 @@
 package dev.fp.heathrowpollution;
 
 import dev.fp.heathrowpollution.config.Config;
+import dev.fp.heathrowpollution.model.airquality.AirQualityDataset;
 import dev.fp.heathrowpollution.service.DataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.stereotype.Component;
 
 @SpringBootApplication
 class HeathrowStudyRunner implements CommandLineRunner {
@@ -39,11 +39,9 @@ class HeathrowStudyRunner implements CommandLineRunner {
 
         if (config.isLoadJsonFiles()){
             config.getLocations().forEach(p -> {
-                    System.out.println(p.getDataSource());
                     if (p.getDataSource().equals("LondonAir")){
-                        // To Do: Load London Air data
-                        // Either from LondonAirMapper or from DataService.load()
-
+                        String cannonincalPath = String.format(p.getDatafolder() + p.getFileformat(), start, end);
+                        AirQualityDataset dataSet = dataService.load(cannonincalPath);
                     }
                 }
             );
