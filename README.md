@@ -108,6 +108,10 @@ Road traffic follows a cyclical approach depending on day (e.g., Christmas), day
 | 19:45 - 23:00 | 23:00 last landing | low🔹        | high🔹    |
 | 23:00 - 23:59 |                    | low          | --        |
 
+Another way of visualising the same table:
+
+![Pollution chart](https://github.com/fapomar/heathrow-pollution-study/blob/main/docs/Pollution_chart.jpg)
+
 This makes it possible to compare pollution measurements, for example, at 4am (low road, no aircraft) against 5am or 6am (low road, high aircraft).
 
 ## Methodology
