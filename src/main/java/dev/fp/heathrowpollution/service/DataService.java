@@ -6,6 +6,9 @@ import dev.fp.heathrowpollution.model.airquality.AirQualityObservation;
 import dev.fp.heathrowpollution.model.airquality.raw.LondonAirResponse;
 import dev.fp.heathrowpollution.model.airquality.raw.RawColumnDefinition;
 import dev.fp.heathrowpollution.model.airquality.raw.RawDataEntry;
+import dev.fp.heathrowpollution.model.weather.WeatherDataset;
+import dev.fp.heathrowpollution.model.weather.WeatherObservation;
+import dev.fp.heathrowpollution.model.weather.raw.OpenMeteoResponse;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
@@ -94,6 +97,34 @@ public class DataService {
                 .toList();
 
         return new AirQualityDataset(days, name);
+    }
+
+    public WeatherDataset loadWeather(String inputFile, String name) {
+        try {
+            OpenMeteoResponse response = mapper.readValue(Path.of(inputFile).toFile(), OpenMeteoResponse.class);
+            return toWeatherDataset(response, name);
+        } catch (IOException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    private WeatherDataset toWeatherDataset(OpenMeteoResponse response, String name) {
+        if (response.getHourly() == null) {
+            System.err.printf("Weather data for '%s' has no hourly block — skipping%n", name);
+            return new WeatherDataset(name, List.of());
+        }
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
+        List<String> times = response.getHourly().getTime();
+        List<Integer> directions = response.getHourly().getWind_direction_180m();
+
+        List<WeatherObservation> observations = new ArrayList<>();
+        for (int i = 0; i < times.size(); i++) {
+            LocalDateTime ts = LocalDateTime.parse(times.get(i), fmt);
+            observations.add(new WeatherObservation(ts, directions.get(i)));
+        }
+
+        return new WeatherDataset(name, observations);
     }
 
     private double parseDouble(String value) {
