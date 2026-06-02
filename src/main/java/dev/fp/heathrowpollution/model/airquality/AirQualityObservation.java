@@ -14,4 +14,5 @@ public class AirQualityObservation {
     private LocalDateTime timestamp;
     private double pm25;
     private double pm10;
+    private double nox;
 }

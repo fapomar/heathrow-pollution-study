@@ -41,7 +41,9 @@ class HeathrowStudyRunner implements CommandLineRunner {
             config.getLocations().forEach(p -> {
                     if (p.getDataSource().equals("LondonAir")){
                         String cannonincalPath = String.format(p.getDatafolder() + p.getFileformat(), start, end);
-                        AirQualityDataset dataSet = dataService.load(cannonincalPath);
+                        AirQualityDataset dataSet = dataService.load(cannonincalPath, p.getName());
+                        int totalObs = dataSet.getDays().stream().mapToInt(d -> d.getMeasurements().size()).sum();
+                        System.out.printf("Loaded %-35s %d days, %d observations%n", dataSet.getName(), dataSet.getDays().size(), totalObs);
                     }
                 }
             );
