@@ -18,4 +18,5 @@ public class Config {
     private String enddate;
     private boolean downloadData;
     private boolean loadJsonFiles;
+    private boolean generateScenario1;
 }

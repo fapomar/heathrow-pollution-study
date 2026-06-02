@@ -2,11 +2,14 @@ package dev.fp.heathrowpollution;
 
 import dev.fp.heathrowpollution.config.Config;
 import dev.fp.heathrowpollution.model.airquality.AirQualityDataset;
+import dev.fp.heathrowpollution.model.scenario.ScenarioRow;
 import dev.fp.heathrowpollution.model.weather.WeatherDataset;
 import dev.fp.heathrowpollution.service.DataService;
 import dev.fp.heathrowpollution.service.RunwayService;
+import dev.fp.heathrowpollution.service.ScenarioService;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -15,67 +18,54 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 class HeathrowStudyRunner implements CommandLineRunner {
 
-    @Autowired
-    private Config config;
-
-    @Autowired
-    private DataService dataService;
-
-    @Autowired
-    private RunwayService runwayService;
+    @Autowired private Config config;
+    @Autowired private DataService dataService;
+    @Autowired private RunwayService runwayService;
+    @Autowired private ScenarioService scenarioService;
 
     public static void main(String[] args) {
         SpringApplication.run(HeathrowStudyRunner.class, args);
     }
 
     @Override
-    public void run(String[] args) throws Exception {
+    public void run(String[] args) {
         String start = config.getStartdate();
         String end = config.getEnddate();
 
-        if (config.isDownloadData()){
-                config.getLocations().forEach(p -> {
-                    String urlTemplate = p.getUrl();
-                    String cannonincalPath = String.format(p.getDatafolder() + p.getFileformat(), start, end);
-                    String url = String.format(urlTemplate, start, end);
-                    dataService.downloadJson(url,cannonincalPath);
-                    System.out.println(url);
-                }
-            );
-        }
-
-        System.out.println("\n--- Runway schedule sample ---");
-        var samples = new LocalDateTime[]{
-            LocalDateTime.of(2026, 5, 20,  3, 0),   // night
-            LocalDateTime.of(2026, 5, 20,  6, 30),  // both runways
-            LocalDateTime.of(2026, 5, 20, 10, 0),   // morning
-            LocalDateTime.of(2026, 5, 20, 17, 0),   // afternoon
-            LocalDateTime.of(2026, 5, 25,  6, 0),   // week boundary - morning
-            LocalDateTime.of(2026, 5, 25,  2, 0),   // Monday before 06:00 -> previous week night
-        };
-        for (LocalDateTime dt : samples) {
-            String result = runwayService.getRunway(dt)
-                    .map(r -> r.toString())
-                    .orElse("no schedule");
-            System.out.printf("  %s  ->  %s%n", dt, result);
-        }
-        System.out.println();
-
-        if (config.isLoadJsonFiles()){
+        if (config.isDownloadData()) {
             config.getLocations().forEach(p -> {
-                    if (p.getDataSource().equals("LondonAir")) {
-                        String cannonincalPath = String.format(p.getDatafolder() + p.getFileformat(), start, end);
-                        AirQualityDataset dataSet = dataService.load(cannonincalPath, p.getName());
-                        int totalObs = dataSet.getDays().stream().mapToInt(d -> d.getMeasurements().size()).sum();
-                        System.out.printf("Loaded %-35s %d days, %d observations%n", dataSet.getName(), dataSet.getDays().size(), totalObs);
-                    } else if (p.getDataSource().equals("OpenMeteo")) {
-                        String cannonincalPath = String.format(p.getDatafolder() + p.getFileformat(), start, end);
-                        WeatherDataset dataSet = dataService.loadWeather(cannonincalPath, p.getName());
-                        long nonNull = dataSet.getObservations().stream().filter(o -> o.getWindDirection180m() != null).count();
-                        System.out.printf("Loaded %-35s %d observations (%d with data)%n", dataSet.getName(), dataSet.getObservations().size(), nonNull);
-                    }
+                String path = String.format(p.getDatafolder() + p.getFileformat(), start, end);
+                String url  = String.format(p.getUrl(), start, end);
+                dataService.downloadJson(url, path);
+                System.out.println(url);
+            });
+        }
+
+        AirQualityDataset batterseaAQM    = null;
+        WeatherDataset    heathrowWeather = null;
+
+        if (config.isLoadJsonFiles()) {
+            for (var p : config.getLocations()) {
+                String path = String.format(p.getDatafolder() + p.getFileformat(), start, end);
+                if (p.getDataSource().equals("LondonAir")) {
+                    AirQualityDataset ds = dataService.load(path, p.getName());
+                    int total = ds.getDays().stream().mapToInt(d -> d.getMeasurements().size()).sum();
+                    System.out.printf("Loaded %-35s %d days, %d observations%n", ds.getName(), ds.getDays().size(), total);
+                    if (p.getName().contains("Battersea")) batterseaAQM = ds;
+                } else if (p.getDataSource().equals("OpenMeteo")) {
+                    WeatherDataset ds = dataService.loadWeather(path, p.getName());
+                    long nonNull = ds.getObservations().stream().filter(o -> o.getWindDirection180m() != null).count();
+                    System.out.printf("Loaded %-35s %d observations (%d with data)%n", ds.getName(), ds.getObservations().size(), nonNull);
+                    if (p.getName().contains("Heathrow")) heathrowWeather = ds;
                 }
-            );
+            }
+        }
+
+        if (config.isGenerateScenario1() && batterseaAQM != null && heathrowWeather != null) {
+            List<ScenarioRow> results = scenarioService.runScenario1(
+                    batterseaAQM, heathrowWeather,
+                    LocalDate.parse(start), LocalDate.parse(end));
+            scenarioService.printTable(results);
         }
     }
 }

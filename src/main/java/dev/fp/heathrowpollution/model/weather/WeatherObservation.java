@@ -11,4 +11,5 @@ import java.time.LocalDateTime;
 public class WeatherObservation {
     private LocalDateTime timestamp;
     private Integer windDirection180m;
+    private Double windSpeed180m;  // knots
 }

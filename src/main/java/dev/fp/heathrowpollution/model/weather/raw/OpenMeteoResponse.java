@@ -18,5 +18,6 @@ public class OpenMeteoResponse {
     public static class OpenMeteoHourly {
         private List<String> time;
         private List<Integer> wind_direction_180m;
+        private List<Double> wind_speed_180m;
     }
 }

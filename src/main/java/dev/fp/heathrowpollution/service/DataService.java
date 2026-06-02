@@ -117,11 +117,13 @@ public class DataService {
         DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm");
         List<String> times = response.getHourly().getTime();
         List<Integer> directions = response.getHourly().getWind_direction_180m();
+        List<Double> speeds = response.getHourly().getWind_speed_180m();
 
         List<WeatherObservation> observations = new ArrayList<>();
         for (int i = 0; i < times.size(); i++) {
             LocalDateTime ts = LocalDateTime.parse(times.get(i), fmt);
-            observations.add(new WeatherObservation(ts, directions.get(i)));
+            Double speed = (speeds != null && i < speeds.size()) ? speeds.get(i) : null;
+            observations.add(new WeatherObservation(ts, directions.get(i), speed));
         }
 
         return new WeatherDataset(name, observations);
