@@ -147,6 +147,66 @@ Sample output data structure:
 | 2025-03-02 | 27    | 33    | 37    | 34    | 49    |
 | 2025-03-02 | 31    | 34    | 38    | 40    | 50    |
 
+## How to Run
+
+### Prerequisites
+
+- Java 26
+- Maven 3.x
+
+### 1. Create data directories
+
+The app writes downloaded API responses to local folders. Create them before the first run:
+
+```bash
+mkdir -p data/aqm-battersea data/aqm-richmond data/weather-heathrow data/weather-battersea data/weather-richmond
+```
+
+### 2. Configure the date range
+
+Edit `src/main/resources/application.properties` and set the study period:
+
+```properties
+app.startdate=2025-11-01
+app.enddate=2025-11-28
+```
+
+> **Note:** Open-Meteo only provides 3 months of historical weather data. Keep the date range within that window.
+
+### 3. Download data
+
+Set `app.downloadData=true` in `application.properties`, then build and run:
+
+```bash
+mvn clean package
+mvn spring-boot:run
+```
+
+This fetches JSON data from the London Air Quality Network and Open-Meteo APIs and saves it to the `data/` directories created above.
+
+### 4. Process data
+
+Once the data is downloaded, set `app.downloadData=false` and `app.loadJsonFiles=true` in `application.properties`, then run again:
+
+```bash
+mvn spring-boot:run
+```
+
+Alternatively, run the packaged JAR directly:
+
+```bash
+java -jar target/heathrow-pollution-study-1.0-SNAPSHOT.jar
+```
+
+### Configuration reference
+
+| Property             | Description                                          |
+| -------------------- | ---------------------------------------------------- |
+| `app.startdate`      | Start of the study period (`YYYY-MM-DD`)             |
+| `app.enddate`        | End of the study period (`YYYY-MM-DD`)               |
+| `app.downloadData`   | `true` to fetch fresh data from APIs                 |
+| `app.loadJsonFiles`  | `true` to load and process previously downloaded data |
+
 ## Study Limitations
 A future research could look at comparing pollution data across different days; for example, a workday Monday against a school holiday Monday whilst controlling for cofounding variables (i.e., only days with similar meteorological conditions)
 
