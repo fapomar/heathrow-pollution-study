@@ -24,4 +24,6 @@ public class Config {
     private String scenario2Output;
     private boolean generateScenario3;
     private String scenario3Output;
+    private boolean generateScenario4;
+    private String scenario4Output;
 }

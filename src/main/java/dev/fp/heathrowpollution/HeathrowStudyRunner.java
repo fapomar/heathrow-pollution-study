@@ -10,6 +10,7 @@ import dev.fp.heathrowpollution.service.DownloadService;
 import dev.fp.heathrowpollution.service.Scenario1Service;
 import dev.fp.heathrowpollution.service.Scenario2Service;
 import dev.fp.heathrowpollution.service.Scenario3Service;
+import dev.fp.heathrowpollution.service.Scenario4Service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,6 +32,7 @@ class HeathrowStudyRunner implements CommandLineRunner {
     @Autowired private Scenario1Service scenario1Service;
     @Autowired private Scenario2Service scenario2Service;
     @Autowired private Scenario3Service scenario3Service;
+    @Autowired private Scenario4Service scenario4Service;
 
     public static void main(String[] args) {
         SpringApplication.run(HeathrowStudyRunner.class, args);
@@ -53,7 +55,8 @@ class HeathrowStudyRunner implements CommandLineRunner {
         AirQualityDataset batterseaAQM    = null;
         AirQualityDataset richmondAQM     = null;
         WeatherDataset    heathrowWeather = null;
-        WeatherDataset    richmondWeather = null;
+        WeatherDataset    richmondWeather  = null;
+        WeatherDataset    batterseaWeather = null;
 
         if (config.isLoadJsonFiles()) {
             for (var p : config.getLocations()) {
@@ -69,7 +72,8 @@ class HeathrowStudyRunner implements CommandLineRunner {
                     long nonNull = ds.getObservations().stream().filter(o -> o.getWindDirection180m() != null).count();
                     System.out.printf("Loaded %-45s %d observations (%d with data)%n", ds.getName(), ds.getObservations().size(), nonNull);
                     if (p.getRole() == LocationRole.WEATHER_HEATHROW) heathrowWeather = ds;
-                    if (p.getRole() == LocationRole.WEATHER_RICHMOND) richmondWeather = ds;
+                    if (p.getRole() == LocationRole.WEATHER_RICHMOND)  richmondWeather  = ds;
+                    if (p.getRole() == LocationRole.WEATHER_BATTERSEA) batterseaWeather = ds;
                 }
             }
         }
@@ -93,6 +97,13 @@ class HeathrowStudyRunner implements CommandLineRunner {
                     richmondAQM, heathrowWeather, richmondWeather,
                     LocalDate.parse(start), LocalDate.parse(end));
             writeCsv(results, config.getScenario3Output());
+        }
+
+        if (config.isGenerateScenario4() && batterseaAQM != null && heathrowWeather != null && batterseaWeather != null) {
+            List<ScenarioRow> results = scenario4Service.run(
+                    batterseaAQM, heathrowWeather, batterseaWeather,
+                    LocalDate.parse(start), LocalDate.parse(end));
+            writeCsv(results, config.getScenario4Output());
         }
     }
 
