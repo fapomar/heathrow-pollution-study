@@ -1,6 +1,7 @@
 package dev.fp.heathrowpollution;
 
 import dev.fp.heathrowpollution.config.Config;
+import dev.fp.heathrowpollution.model.LocationRole;
 import dev.fp.heathrowpollution.model.airquality.AirQualityDataset;
 import dev.fp.heathrowpollution.model.scenario.ScenarioRow;
 import dev.fp.heathrowpollution.model.weather.WeatherDataset;
@@ -51,12 +52,12 @@ class HeathrowStudyRunner implements CommandLineRunner {
                     AirQualityDataset ds = dataService.load(path, p.getName());
                     int total = ds.getDays().stream().mapToInt(d -> d.getMeasurements().size()).sum();
                     System.out.printf("Loaded %-35s %d days, %d observations%n", ds.getName(), ds.getDays().size(), total);
-                    if (p.getName().contains("Battersea")) batterseaAQM = ds;
+                    if (p.getRole() == LocationRole.AQM_BATTERSEA) batterseaAQM = ds;
                 } else if (p.getDataSource().equals("OpenMeteo")) {
                     WeatherDataset ds = dataService.loadWeather(path, p.getName());
                     long nonNull = ds.getObservations().stream().filter(o -> o.getWindDirection180m() != null).count();
                     System.out.printf("Loaded %-35s %d observations (%d with data)%n", ds.getName(), ds.getObservations().size(), nonNull);
-                    if (p.getName().contains("Heathrow")) heathrowWeather = ds;
+                    if (p.getRole() == LocationRole.WEATHER_HEATHROW) heathrowWeather = ds;
                 }
             }
         }
