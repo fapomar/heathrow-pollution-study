@@ -19,4 +19,5 @@ public class Config {
     private boolean downloadData;
     private boolean loadJsonFiles;
     private boolean generateScenario1;
+    private String scenario1Output;
 }

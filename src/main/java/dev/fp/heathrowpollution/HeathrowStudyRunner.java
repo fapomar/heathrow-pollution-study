@@ -70,7 +70,7 @@ class HeathrowStudyRunner implements CommandLineRunner {
             List<ScenarioRow> results = scenario1Service.run(
                     batterseaAQM, heathrowWeather,
                     LocalDate.parse(start), LocalDate.parse(end));
-            writeCsv(results, "output/scenario1.csv");
+            writeCsv(results, config.getScenario1Output());
         }
     }
 
