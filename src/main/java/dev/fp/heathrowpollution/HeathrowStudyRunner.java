@@ -7,6 +7,7 @@ import dev.fp.heathrowpollution.model.airquality.AirQualityDataset;
 import dev.fp.heathrowpollution.model.scenario.ScenarioRow;
 import dev.fp.heathrowpollution.model.weather.WeatherDataset;
 import dev.fp.heathrowpollution.service.DataService;
+import dev.fp.heathrowpollution.service.DownloadService;
 import dev.fp.heathrowpollution.service.RunwayService;
 import dev.fp.heathrowpollution.service.ScenarioService;
 
@@ -21,6 +22,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 class HeathrowStudyRunner implements CommandLineRunner {
 
     @Autowired private Config config;
+    @Autowired private DownloadService downloadService;
     @Autowired private DataService dataService;
     @Autowired private RunwayService runwayService;
     @Autowired private ScenarioService scenarioService;
@@ -38,7 +40,7 @@ class HeathrowStudyRunner implements CommandLineRunner {
             config.getLocations().forEach(p -> {
                 String path = String.format(p.getDatafolder() + p.getFileformat(), start, end);
                 String url  = String.format(p.getUrl(), start, end);
-                dataService.downloadJson(url, path);
+                downloadService.downloadJson(url, path);
                 System.out.println(url);
             });
         }

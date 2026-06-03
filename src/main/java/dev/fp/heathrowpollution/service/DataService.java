@@ -9,14 +9,10 @@ import dev.fp.heathrowpollution.model.airquality.raw.RawDataEntry;
 import dev.fp.heathrowpollution.model.weather.WeatherDataset;
 import dev.fp.heathrowpollution.model.weather.WeatherObservation;
 import dev.fp.heathrowpollution.model.weather.raw.OpenMeteoResponse;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
-import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -27,35 +23,12 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
-
 @Service
 public class DataService {
 
     private static final DateTimeFormatter AQM_DATE_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     private final ObjectMapper mapper = new ObjectMapper();
-
-    public boolean downloadJson(String url, String outputFile) {
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(url))
-                .header("Accept", "application/json")
-                .GET()
-                .build();
-
-        try {
-            HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
-            ObjectWriter writer = mapper.writerWithDefaultPrettyPrinter();
-            String prettyContent = writer.writeValueAsString(mapper.readTree(response.body()));
-            Files.writeString(Path.of(outputFile), prettyContent);
-        } catch (IOException | InterruptedException e) {
-            e.printStackTrace();
-            return false;
-        }
-        return true;
-    }
 
     public AirQualityDataset load(String inputFile, String name) {
         try {
@@ -72,9 +45,9 @@ public class DataService {
         Map<String, String> speciesColumn = new HashMap<>();
         for (RawColumnDefinition col : response.getColumns()) {
             String colName = col.getColumnName().toLowerCase();
-            if (colName.contains("pm2.5"))                speciesColumn.put("PM2.5", col.getColumnId());
-            else if (colName.contains("pm10"))            speciesColumn.put("PM10",  col.getColumnId());
-            else if (colName.contains("oxides of nitrogen")) speciesColumn.put("NOX", col.getColumnId());
+            if (colName.contains("pm2.5"))                   speciesColumn.put("PM2.5", col.getColumnId());
+            else if (colName.contains("pm10"))               speciesColumn.put("PM10",  col.getColumnId());
+            else if (colName.contains("oxides of nitrogen")) speciesColumn.put("NOX",   col.getColumnId());
         }
 
         String pm25Col = speciesColumn.get("PM2.5");
