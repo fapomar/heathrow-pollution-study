@@ -1,5 +1,6 @@
-package dev.fp.heathrowpollution.model;
+package dev.fp.heathrowpollution.config;
 
+import dev.fp.heathrowpollution.model.LocationRole;
 import lombok.Getter;
 import lombok.Setter;
 

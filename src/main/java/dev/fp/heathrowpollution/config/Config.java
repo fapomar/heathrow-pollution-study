@@ -1,6 +1,6 @@
 package dev.fp.heathrowpollution.config;
 
-import dev.fp.heathrowpollution.model.Location;
+import dev.fp.heathrowpollution.config.Location;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;

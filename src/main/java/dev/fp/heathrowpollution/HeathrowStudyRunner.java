@@ -1,6 +1,7 @@
 package dev.fp.heathrowpollution;
 
 import dev.fp.heathrowpollution.config.Config;
+import dev.fp.heathrowpollution.config.Location;
 import dev.fp.heathrowpollution.model.LocationRole;
 import dev.fp.heathrowpollution.model.airquality.AirQualityDataset;
 import dev.fp.heathrowpollution.model.scenario.ScenarioRow;
