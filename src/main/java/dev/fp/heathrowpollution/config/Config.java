@@ -20,4 +20,6 @@ public class Config {
     private boolean loadJsonFiles;
     private boolean generateScenario1;
     private String scenario1Output;
+    private boolean generateScenario2;
+    private String scenario2Output;
 }

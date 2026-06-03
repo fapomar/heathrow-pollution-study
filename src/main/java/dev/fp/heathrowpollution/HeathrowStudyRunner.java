@@ -8,6 +8,7 @@ import dev.fp.heathrowpollution.model.weather.WeatherDataset;
 import dev.fp.heathrowpollution.service.DataService;
 import dev.fp.heathrowpollution.service.DownloadService;
 import dev.fp.heathrowpollution.service.Scenario1Service;
+import dev.fp.heathrowpollution.service.Scenario2Service;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -27,6 +28,7 @@ class HeathrowStudyRunner implements CommandLineRunner {
     @Autowired private DownloadService downloadService;
     @Autowired private DataService dataService;
     @Autowired private Scenario1Service scenario1Service;
+    @Autowired private Scenario2Service scenario2Service;
 
     public static void main(String[] args) {
         SpringApplication.run(HeathrowStudyRunner.class, args);
@@ -47,6 +49,7 @@ class HeathrowStudyRunner implements CommandLineRunner {
         }
 
         AirQualityDataset batterseaAQM    = null;
+        AirQualityDataset richmondAQM     = null;
         WeatherDataset    heathrowWeather = null;
 
         if (config.isLoadJsonFiles()) {
@@ -55,12 +58,13 @@ class HeathrowStudyRunner implements CommandLineRunner {
                 if (p.getDataSource().equals("LondonAir")) {
                     AirQualityDataset ds = dataService.load(path, p.getName());
                     int total = ds.getDays().stream().mapToInt(d -> d.getMeasurements().size()).sum();
-                    System.out.printf("Loaded %-35s %d days, %d observations%n", ds.getName(), ds.getDays().size(), total);
+                    System.out.printf("Loaded %-45s %d days, %d observations%n", ds.getName(), ds.getDays().size(), total);
                     if (p.getRole() == LocationRole.AQM_BATTERSEA) batterseaAQM = ds;
+                    if (p.getRole() == LocationRole.AQM_RICHMOND)  richmondAQM  = ds;
                 } else if (p.getDataSource().equals("OpenMeteo")) {
                     WeatherDataset ds = dataService.loadWeather(path, p.getName());
                     long nonNull = ds.getObservations().stream().filter(o -> o.getWindDirection180m() != null).count();
-                    System.out.printf("Loaded %-35s %d observations (%d with data)%n", ds.getName(), ds.getObservations().size(), nonNull);
+                    System.out.printf("Loaded %-45s %d observations (%d with data)%n", ds.getName(), ds.getObservations().size(), nonNull);
                     if (p.getRole() == LocationRole.WEATHER_HEATHROW) heathrowWeather = ds;
                 }
             }
@@ -71,6 +75,13 @@ class HeathrowStudyRunner implements CommandLineRunner {
                     batterseaAQM, heathrowWeather,
                     LocalDate.parse(start), LocalDate.parse(end));
             writeCsv(results, config.getScenario1Output());
+        }
+
+        if (config.isGenerateScenario2() && richmondAQM != null && heathrowWeather != null) {
+            List<ScenarioRow> results = scenario2Service.run(
+                    richmondAQM, heathrowWeather,
+                    LocalDate.parse(start), LocalDate.parse(end));
+            writeCsv(results, config.getScenario2Output());
         }
     }
 
