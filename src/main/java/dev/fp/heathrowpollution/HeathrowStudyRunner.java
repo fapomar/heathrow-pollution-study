@@ -1,7 +1,6 @@
 package dev.fp.heathrowpollution;
 
 import dev.fp.heathrowpollution.config.Config;
-import dev.fp.heathrowpollution.config.Location;
 import dev.fp.heathrowpollution.model.LocationRole;
 import dev.fp.heathrowpollution.model.airquality.AirQualityDataset;
 import dev.fp.heathrowpollution.model.scenario.ScenarioRow;
@@ -9,8 +8,11 @@ import dev.fp.heathrowpollution.model.weather.WeatherDataset;
 import dev.fp.heathrowpollution.service.DataService;
 import dev.fp.heathrowpollution.service.DownloadService;
 import dev.fp.heathrowpollution.service.Scenario1Service;
-import dev.fp.heathrowpollution.service.ScenarioService;
 
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.time.LocalDate;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +27,6 @@ class HeathrowStudyRunner implements CommandLineRunner {
     @Autowired private DownloadService downloadService;
     @Autowired private DataService dataService;
     @Autowired private Scenario1Service scenario1Service;
-    @Autowired private ScenarioService scenarioService;
 
     public static void main(String[] args) {
         SpringApplication.run(HeathrowStudyRunner.class, args);
@@ -69,7 +70,30 @@ class HeathrowStudyRunner implements CommandLineRunner {
             List<ScenarioRow> results = scenario1Service.run(
                     batterseaAQM, heathrowWeather,
                     LocalDate.parse(start), LocalDate.parse(end));
-            scenarioService.writeCsv(results, "output/scenario1.csv");
+            writeCsv(results, "output/scenario1.csv");
+        }
+    }
+
+    private void writeCsv(List<ScenarioRow> rows, String outputFile) {
+        try {
+            Path path = Path.of(outputFile);
+            Files.createDirectories(path.getParent());
+            try (PrintWriter pw = new PrintWriter(Files.newBufferedWriter(path))) {
+                StringBuilder header = new StringBuilder("Date");
+                for (int h = 0; h < 24; h++) header.append(",").append(h);
+                pw.println(header);
+                for (ScenarioRow row : rows) {
+                    StringBuilder line = new StringBuilder(row.getDate().toString());
+                    for (Double val : row.getPm25()) {
+                        line.append(",");
+                        if (val != null) line.append(val);
+                    }
+                    pw.println(line);
+                }
+            }
+            System.out.printf("CSV written to %s%n", outputFile);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
