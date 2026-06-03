@@ -8,6 +8,7 @@ import dev.fp.heathrowpollution.model.scenario.ScenarioRow;
 import dev.fp.heathrowpollution.model.weather.WeatherDataset;
 import dev.fp.heathrowpollution.service.DataService;
 import dev.fp.heathrowpollution.service.DownloadService;
+import dev.fp.heathrowpollution.service.Scenario1Service;
 import dev.fp.heathrowpollution.service.ScenarioService;
 
 import java.time.LocalDate;
@@ -23,6 +24,7 @@ class HeathrowStudyRunner implements CommandLineRunner {
     @Autowired private Config config;
     @Autowired private DownloadService downloadService;
     @Autowired private DataService dataService;
+    @Autowired private Scenario1Service scenario1Service;
     @Autowired private ScenarioService scenarioService;
 
     public static void main(String[] args) {
@@ -64,7 +66,7 @@ class HeathrowStudyRunner implements CommandLineRunner {
         }
 
         if (config.isGenerateScenario1() && batterseaAQM != null && heathrowWeather != null) {
-            List<ScenarioRow> results = scenarioService.runScenario1(
+            List<ScenarioRow> results = scenario1Service.run(
                     batterseaAQM, heathrowWeather,
                     LocalDate.parse(start), LocalDate.parse(end));
             scenarioService.writeCsv(results, "output/scenario1.csv");
