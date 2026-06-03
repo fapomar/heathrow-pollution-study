@@ -65,22 +65,6 @@ public class ScenarioService {
         return results;
     }
 
-    public void printTable(List<ScenarioRow> rows) {
-        System.out.printf("%n--- Scenario 1: Westerly ops / runway 27R (northern) / Battersea PM2.5 ---%n");
-        System.out.printf("%-12s", "Date");
-        for (int h = 0; h < 24; h++) System.out.printf(" |%5d", h);
-        System.out.println();
-        System.out.println("-".repeat(12 + 24 * 7));
-        for (ScenarioRow row : rows) {
-            System.out.printf("%-12s", row.getDate());
-            for (Double val : row.getPm25()) {
-                if (val != null) System.out.printf(" |%5.1f", val);
-                else             System.out.printf(" |     ");
-            }
-            System.out.println();
-        }
-    }
-
     public void writeCsv(List<ScenarioRow> rows, String outputFile) {
         try {
             Path path = Path.of(outputFile);

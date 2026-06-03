@@ -8,7 +8,6 @@ import dev.fp.heathrowpollution.model.scenario.ScenarioRow;
 import dev.fp.heathrowpollution.model.weather.WeatherDataset;
 import dev.fp.heathrowpollution.service.DataService;
 import dev.fp.heathrowpollution.service.DownloadService;
-import dev.fp.heathrowpollution.service.RunwayService;
 import dev.fp.heathrowpollution.service.ScenarioService;
 
 import java.time.LocalDate;
@@ -24,7 +23,6 @@ class HeathrowStudyRunner implements CommandLineRunner {
     @Autowired private Config config;
     @Autowired private DownloadService downloadService;
     @Autowired private DataService dataService;
-    @Autowired private RunwayService runwayService;
     @Autowired private ScenarioService scenarioService;
 
     public static void main(String[] args) {
