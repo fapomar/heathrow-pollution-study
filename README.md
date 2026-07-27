@@ -220,3 +220,6 @@ A future research could look at comparing pollution data across different days; 
 - [London Air Quality network](#selected-aqms)
 - [Free measure tools](https://www.freemaptools.com/measure-distance.htm)
 - [Flight Radar 24](https://www.flightradar24.com/)
+
+# About the Author
+I'm Filipe Albero Pomar. Engineering manager, sometime product manager, still hands-on with the code. Curious how? More at [alpomar.dev](https://alpomar.dev)
